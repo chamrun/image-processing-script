@@ -13,10 +13,11 @@ def get_input(file_name):
 
 def to_mtx(img):
     """
-    This method just reverse x and y of an image matrix because of the different order of x and y in PIL and Matplotlib library
+    This method just reverse x and y of an image matrix
+    because of the different order of x and y in PIL and Matplotlib library
     """
-    H, V, C = img.shape
-    mtr = np.zeros((V, H, C), dtype='int')
+    h, v, c = img.shape
+    mtr = np.zeros((v, h, c), dtype='int')
     for i in range(img.shape[0]):
         mtr[:, i] = img[i]
     return mtr
@@ -37,7 +38,8 @@ def get_coef(a, b, n):
 
     return res
 
-def showImage(image, title, save_file=True):
+
+def show_image(image, title, save_file=True):
     final_ans = to_mtx(image)
     final_ans = final_ans.astype(np.uint8)
 
@@ -55,7 +57,7 @@ def showImage(image, title, save_file=True):
     plt.show()
 
 
-def Filter(img, filter_matrix):
+def filter(img, filter_matrix):
     m, n, l = img.shape
     res = np.zeros((m, n, l))
 

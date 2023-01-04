@@ -1,27 +1,29 @@
 from utils import *
 import numpy as np
 
-def grayScaledFilter(img):
-    """
-    TODO : Complete this part based on the description in the manual!
-    """
-    pass
 
-def customFilter(img):
+def gray_scaled_filter(img):
     """
     TODO : Complete this part based on the description in the manual!
     """
     pass
 
 
-def scaleImg(img, scale_width, scale_height):
+def custom_filter(img):
     """
     TODO : Complete this part based on the description in the manual!
     """
     pass
 
 
-def cropImg(img, start_row, end_row, start_column, end_column):
+def scale_img(img, scale_width, scale_height):
+    """
+    TODO : Complete this part based on the description in the manual!
+    """
+    pass
+
+
+def crop_img(img, start_row, end_row, start_column, end_column):
     """
     TODO : Complete this part based on the description in the manual!
     """
@@ -34,15 +36,15 @@ if __name__ == "__main__":
     # You can change width and height if you want
     width, height = 300, 400
 
-    showImage(image_matrix, title="Input Image")
+    show_image(image_matrix, title="Input Image")
 
-    grayScalePic = grayScaledFilter(image_matrix)
-    showImage(grayScalePic, title="Gray Scaled")
+    gray_scale_pic = gray_scaled_filter(image_matrix)
+    show_image(gray_scale_pic, title="Gray Scaled")
 
-    customFilter(image_matrix)
+    custom_filter(image_matrix)
 
-    croppedImage = cropImg(image_matrix, 50, 300, 50, 225)
-    showImage(croppedImage, title="Cropped Image")
+    cropped_image = crop_img(image_matrix, 50, 300, 50, 225)
+    show_image(cropped_image, title="Cropped Image")
 
-    scaledImage = scaleImg(image_matrix, 2, 3)
-    showImage(scaledImage, title="Scaled Image")
+    scaled_image = scale_img(image_matrix, 2, 3)
+    show_image(scaled_image, title="Scaled Image")
