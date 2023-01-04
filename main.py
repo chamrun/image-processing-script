@@ -10,49 +10,47 @@ def main():
 
     # show_image(image_matrix, title="Input Image")
 
-    # gray_scale_pic = gray_scaled_filter(image_matrix)
-    # show_image(gray_scale_pic, title="Gray Scaled")
-    # return
-    #
-    # custom_filter(image_matrix)
-
-    cropped_image = crop_img(image_matrix, 100, 700, 100, 300)
-    show_image(cropped_image, title="Cropped Image")
+    gray_scale_pic = gray_scaled_filter(image_matrix)
+    show_image(gray_scale_pic, title="Gray Scaled")
     return
 
-    scaled_image = scale_img(image_matrix, 2, 3)
-    show_image(scaled_image, title="Scaled Image")
+    filtered_pic = custom_filter(image_matrix)
+    show_image(filtered_pic, title="Filtered Image")
+
+    # cropped_image = crop_img(image_matrix, 100, 700, 100, 300)
+    # show_image(cropped_image, title="Cropped Image")
+    # return
+
+    # scaled_image = scale_img(image_matrix, 5, 3)
+    # show_image(scaled_image, title="Scaled Image")
 
 
 def gray_scaled_filter(img):
-    gray_scaled_pic = np.zeros((img.shape[0], img.shape[1], 3), dtype='int')
-    log("Gray scaled filter started")
+    filtered_pic = np.zeros((img.shape[0], img.shape[1], 3), dtype='int')
+    log("Custom filter started")
     log(f'length of image matrix is {len(img)}')
     for i in range(len(img)):
         if i % 100 == 0:
             log(f'row {i} is done')
 
-        for j in img[i]:
-            # gray = int(0.1 * j[0] + 0.4 * j[1] + 0.5 * j[2])
-            # gray_scaled_pic[i][j] = [gray, gray, gray]
+        for j_index in range(len(img[i])):
+            j = img[i][j_index]
+            gray = int(0.3 * j[0] + 0.59 * j[1] + 0.11 * j[2])
 
-            gray_scaled_pic[i][j] = [int(0.5 * j[0]), int(0.5 * j[1]), int(0.5 * j[2])]
+            filtered_pic[i][j_index] = [gray, gray, gray]
 
-    return gray_scaled_pic
-
-
-def custom_filter(img):
-    """
-    TODO : Complete this part based on the description in the manual!
-    """
-    pass
-
+    return filtered_pic
 
 def scale_img(img, scale_width, scale_height):
-    """
-    TODO : Complete this part based on the description in the manual!
-    """
-    pass
+    scaled_image = np.zeros((img.shape[0] * scale_height, img.shape[1] * scale_width, 3), dtype='int')
+
+    for i in range(len(img)):
+        for j in range(len(img[i])):
+            for k in range(scale_height):
+                for l in range(scale_width):
+                    scaled_image[i * scale_height + k][j * scale_width + l] = img[i][j]
+
+    return scaled_image
 
 
 def crop_img(img, start_row, end_row, start_column, end_column):
@@ -63,6 +61,31 @@ def crop_img(img, start_row, end_row, start_column, end_column):
             cropped_image[i - start_row][j - start_column] = img[i][j]
 
     return cropped_image
+
+
+def custom_filter(img):
+    filtered_pic = np.zeros((img.shape[0], img.shape[1], 3), dtype='int')
+    log("Custom filter started")
+    log(f'length of image matrix is {len(img)}')
+    for i in range(len(img)):
+        if i % 100 == 0:
+            log(f'row {i} is done')
+
+        for j_index in range(len(img[i])):
+            j = img[i][j_index]
+            # gray = int(0.1 * j[0] + 0.4 * j[1] + 0.5 * j[2])
+            # gray_scaled_pic[i][j] = [gray, gray, gray]
+
+            a_ratio = 0.9
+            b_ratio = 0.05
+
+            filtered_blue = int(a_ratio * j[0] + b_ratio * j[1] + b_ratio * j[2])
+            filtered_green = int(b_ratio * j[0] + a_ratio * j[1] + b_ratio * j[2])
+            filtered_red = int(b_ratio * j[0] + b_ratio * j[1] + a_ratio * j[2])
+
+            filtered_pic[i][j_index] = [filtered_blue, filtered_green, filtered_red]
+
+    return filtered_pic
 
 
 def log(s):
