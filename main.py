@@ -56,11 +56,11 @@ def scale_img(img, scale_width, scale_height):
 
 
 def crop_img(img, start_row, end_row, start_column, end_column):
-    """
-    TODO : Complete this part based on the description in the manual!
-    """
-    pass
+    cropped_image = np.zeros((end_row - start_row, end_column - start_column, 3), dtype='int')
 
+    for i in range(start_row, end_row):
+        for j in range(start_column, end_column):
+            cropped_image[i - start_row][j - start_column] = img[i][j]
 
     return cropped_image
 
