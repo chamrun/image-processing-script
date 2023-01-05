@@ -5,20 +5,20 @@ import numpy as np
 def main():
     image_matrix = get_input('pic.jpg')
 
-    # show_image(image_matrix, title="Input Image")
-    #
-    # gray_scale_pic = gray_scaled_filter(image_matrix)
-    # show_image(gray_scale_pic, title="Gray Scaled")
+    show_image(image_matrix, title="Input Image")
+
+    gray_scale_pic = gray_scaled_filter(image_matrix)
+    show_image(gray_scale_pic, title="Gray Scaled")
 
     filtered_image, reversed_filtered_image = custom_filter(image_matrix)
     show_image(filtered_image, title="Custom Filter")
     show_image(reversed_filtered_image, title="Reversed Custom Filter")
 
-    # cropped_image = crop_img(image_matrix, 50, 300, 50, 225)
-    # show_image(cropped_image, title="Cropped Image")
-    #
-    # scaled_image = scale_img(image_matrix, 2, 3)
-    # show_image(scaled_image, title="Scaled Image")
+    cropped_image = crop_img(image_matrix, 50, 300, 50, 225)
+    show_image(cropped_image, title="Cropped Image")
+
+    scaled_image = scale_img(image_matrix, 2, 3)
+    show_image(scaled_image, title="Scaled Image")
 
 
 def gray_scaled_filter(img):
