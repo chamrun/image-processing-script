@@ -5,24 +5,19 @@ import numpy as np
 def main():
     image_matrix = get_input('pic.jpg')
 
-    # You can change width and height if you want
-    width, height = 300, 400
-
-    # show_image(image_matrix, title="Input Image")
+    show_image(image_matrix, title="Input Image")
 
     gray_scale_pic = gray_scaled_filter(image_matrix)
     show_image(gray_scale_pic, title="Gray Scaled")
-    return
 
-    filtered_pic = custom_filter(image_matrix)
-    show_image(filtered_pic, title="Filtered Image")
+    filtered_image = custom_filter(image_matrix)
+    show_image(filtered_image, title="Custom Filter")
 
-    # cropped_image = crop_img(image_matrix, 100, 700, 100, 300)
-    # show_image(cropped_image, title="Cropped Image")
-    # return
+    cropped_image = crop_img(image_matrix, 50, 300, 50, 225)
+    show_image(cropped_image, title="Cropped Image")
 
-    # scaled_image = scale_img(image_matrix, 5, 3)
-    # show_image(scaled_image, title="Scaled Image")
+    scaled_image = scale_img(image_matrix, 2, 3)
+    show_image(scaled_image, title="Scaled Image")
 
 
 def gray_scaled_filter(img):
@@ -41,14 +36,15 @@ def gray_scaled_filter(img):
 
     return filtered_pic
 
+
 def scale_img(img, scale_width, scale_height):
     scaled_image = np.zeros((img.shape[0] * scale_height, img.shape[1] * scale_width, 3), dtype='int')
 
     for i in range(len(img)):
         for j in range(len(img[i])):
-            for k in range(scale_height):
-                for l in range(scale_width):
-                    scaled_image[i * scale_height + k][j * scale_width + l] = img[i][j]
+            for h in range(scale_height):
+                for w in range(scale_width):
+                    scaled_image[i * scale_height + h][j * scale_width + w] = img[i][j]
 
     return scaled_image
 
