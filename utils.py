@@ -57,7 +57,7 @@ def show_image(image, title, save_file=True):
     plt.show()
 
 
-def filter(img, filter_matrix):
+def apply_filter(img, filter_matrix):
     m, n, l = img.shape
     res = np.zeros((m, n, l))
 

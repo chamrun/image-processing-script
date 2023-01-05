@@ -5,19 +5,20 @@ import numpy as np
 def main():
     image_matrix = get_input('pic.jpg')
 
-    show_image(image_matrix, title="Input Image")
+    # show_image(image_matrix, title="Input Image")
+    #
+    # gray_scale_pic = gray_scaled_filter(image_matrix)
+    # show_image(gray_scale_pic, title="Gray Scaled")
 
-    gray_scale_pic = gray_scaled_filter(image_matrix)
-    show_image(gray_scale_pic, title="Gray Scaled")
-
-    filtered_image = custom_filter(image_matrix)
+    filtered_image, reversed_filtered_image = custom_filter(image_matrix)
     show_image(filtered_image, title="Custom Filter")
+    show_image(reversed_filtered_image, title="Reversed Custom Filter")
 
-    cropped_image = crop_img(image_matrix, 50, 300, 50, 225)
-    show_image(cropped_image, title="Cropped Image")
-
-    scaled_image = scale_img(image_matrix, 2, 3)
-    show_image(scaled_image, title="Scaled Image")
+    # cropped_image = crop_img(image_matrix, 50, 300, 50, 225)
+    # show_image(cropped_image, title="Cropped Image")
+    #
+    # scaled_image = scale_img(image_matrix, 2, 3)
+    # show_image(scaled_image, title="Scaled Image")
 
 
 def gray_scaled_filter(img):
@@ -60,28 +61,13 @@ def crop_img(img, start_row, end_row, start_column, end_column):
 
 
 def custom_filter(img):
-    filtered_pic = np.zeros((img.shape[0], img.shape[1], 3), dtype='int')
-    log("Custom filter started")
-    log(f'length of image matrix is {len(img)}')
-    for i in range(len(img)):
-        if i % 100 == 0:
-            log(f'row {i} is done')
+    filter_matrix = np.array([[1, 1, 1], [2, 1, -2], [1, 1, -1]])
+    reversed_filter_matrix = np.linalg.inv(filter_matrix)
 
-        for j_index in range(len(img[i])):
-            j = img[i][j_index]
-            # gray = int(0.1 * j[0] + 0.4 * j[1] + 0.5 * j[2])
-            # gray_scaled_pic[i][j] = [gray, gray, gray]
+    filtered_pic = apply_filter(img, filter_matrix)
+    reversed_filtered_pic = apply_filter(filtered_pic, reversed_filter_matrix)
 
-            a_ratio = 0.9
-            b_ratio = 0.05
-
-            filtered_blue = int(a_ratio * j[0] + b_ratio * j[1] + b_ratio * j[2])
-            filtered_green = int(b_ratio * j[0] + a_ratio * j[1] + b_ratio * j[2])
-            filtered_red = int(b_ratio * j[0] + b_ratio * j[1] + a_ratio * j[2])
-
-            filtered_pic[i][j_index] = [filtered_blue, filtered_green, filtered_red]
-
-    return filtered_pic
+    return filtered_pic, reversed_filtered_pic
 
 
 def log(s):
